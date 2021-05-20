@@ -369,4 +369,16 @@ def kokoro(root_path, meta_file):
             wav_file = os.path.join(root_path, "wavs", cols[0] + ".wav")
             text = cols[2].replace(" ", "")
             items.append([text, wav_file, speaker_name])
+
+# ====== PAPA REO ==========================
+
+def e_te_tau(root_path, meta_file):
+    txt_file = os.path.join(root_path, meta_file)
+    items = []
+    speaker_name = "peter_male"
+    with open(txt_file, "r") as ttf:
+        for line in ttf:
+            wav_name, text = line.rstrip("\n").split("|")
+            wav_path = os.path.join(root_path, "wavs", wav_name)
+            items.append([text, wav_path, speaker_name])
     return items
