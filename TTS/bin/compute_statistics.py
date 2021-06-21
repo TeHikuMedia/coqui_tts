@@ -44,12 +44,28 @@ def main():
         dataset_items = load_meta_data(CONFIG.datasets)[0]  # take only train data
     print(f" > There are {len(dataset_items)} files.")
 
+    clean_dataset_items = []
+    for item in tqdm(dataset_items):
+        # compute features
+        try:
+            wav = ap.load_wav(item if isinstance(item, str) else item[1])
+
+            if len(wav)==0:
+                print(f" > dropping empty file {item[1]}")
+                continue
+        except:
+            print(f" > dropping bad data file {item[1]}")
+            continue
+        clean_dataset_items.append(item)
+
+    print(f" > There were {len(dataset_items)} files.")
+    print(f" > There are {len(clean_dataset_items)} clean files.")
     mel_sum = 0
     mel_square_sum = 0
     linear_sum = 0
     linear_square_sum = 0
     N = 0
-    for item in tqdm(dataset_items):
+    for item in tqdm(clean_dataset_items):
         # compute features
         wav = ap.load_wav(item if isinstance(item, str) else item[1])
         linear = ap.spectrogram(wav)
