@@ -372,7 +372,7 @@ def kokoro(root_path, meta_file):
 
 # ====== PAPA REO ==========================
 
-def e_te_tau(root_path, meta_file):
+def papareo_synthesis(root_path, meta_file):
     txt_file = os.path.join(root_path, meta_file)
     items = []
     speaker_name = "tane_peter"
