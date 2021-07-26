@@ -10,6 +10,7 @@ from packaging import version
 from TTS.tts.utils.text import cleaners
 from TTS.tts.utils.text.chinese_mandarin.phonemizer import chinese_text_to_phonemes
 from TTS.tts.utils.text.japanese.phonemizer import japanese_text_to_phonemes
+from TTS.tts.utils.text.maori.phonemizer import maori_text_to_phonemes
 from TTS.tts.utils.text.symbols import _bos, _eos, _punctuations, make_symbols, phonemes, symbols
 
 # pylint: disable=unnecessary-comprehension
@@ -43,6 +44,11 @@ def text2phone(text, language, use_espeak_phonemes=False):
     """
 
     # TO REVIEW : How to have a good implementation for this?
+    if language == "mi-NZ":
+        ph = maori_text_to_phonemes(text)
+        print(" > Phonemes: {}".format(ph))
+        return ph
+
     if language == "zh-CN":
         ph = chinese_text_to_phonemes(text)
         print(" > Phonemes: {}".format(ph))
